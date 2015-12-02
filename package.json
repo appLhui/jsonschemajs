@@ -1,0 +1,23 @@
+{
+  "name": "jsonschemajs",
+  "version": "0.0.0",
+  "description": "新的语法方便编写json-schema",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/appLhui/jsonschemajs.git"
+  },
+  "keywords": [
+    "json-schema",
+    "schema"
+  ],
+  "author": "墨斐",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/appLhui/jsonschemajs/issues"
+  },
+  "homepage": "https://github.com/appLhui/jsonschemajs"
+}
