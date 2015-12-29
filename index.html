@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>测试</title>
+  <script type="text/javascript" src="./bundle.js"></script>
+</head>
+<body>
+
+<div class="row">
+  <div class="col-md-5">
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#newCodeSourceEditor" aria-controls="newCodeSourceEditor" role="tab" data-toggle="tab">源码编辑模式</a>
+      </li>
+      <li role="presentation">
+        <a href="#newCodeTreeEditor" aria-controls="newCodeTreeEditor" role="tab" data-toggle="tab">树状编辑模式</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active"  id="newCodeSourceEditor" style="height: 600px;">
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="newCodeTreeEditor" style="height: 600px;">
+
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-default" id="encode" type="submit">Encode</button>
+    <button class="btn btn-default" id="decode" type="submit">Decode</button>
+  </div>
+  <div class="col-md-6" id="jsonschmaEditor" style="height: 600px;"></div>
+</div>
+
+
+
+
+
+</body>
+</html>
