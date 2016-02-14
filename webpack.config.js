@@ -10,6 +10,9 @@ module.exports = {
       {
         test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
         loader: 'url-loader'
+      },{
+        test: /\.less$/,
+        loader: "style!css!less"
       }
     ]
   }

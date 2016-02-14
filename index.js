@@ -3,17 +3,20 @@ window.JSONEditor = require('jsoneditor');
 
 require('bootstrap-webpack');
 
-require('./src/css/jsoneditor.css');
-
+require('./src/css/jsoneditor.less');
+require('./src/css/jquery.growl.css');
+require('./src/plug-in/jquery.growl.js');
 
 
 var encode = require('./src/encodeJsonschma');
 var decode = require('./src/decodeJsonschma');
 
+
+
 $( document ).ready(function() {
   // 新的jsonschma语法
+
   var newCodeSourceEditor = new JSONEditor(document.getElementById("newCodeSourceEditor"), {"mode": "code"});
-  var newCodeTreeEditor = new JSONEditor(document.getElementById("newCodeTreeEditor"), {"mode": "tree","search": true});
   var jsonschmaEditor = new JSONEditor(document.getElementById("jsonschmaEditor"), {"mode": "code"});
 
   var json = {
@@ -36,18 +39,17 @@ $( document ).ready(function() {
   };
 
   newCodeSourceEditor.set(json);
-  newCodeTreeEditor.set(json);
 
-  $('#encode').click(function(){
-    jsonschmaEditor.set(encode(newCodeSourceEditor.get()));
-  });
-
-  $('#decode').click(function(){
-    newCodeSourceEditor.set(decode(jsonschmaEditor.get()));
-    newCodeTreeEditor.set(decode(jsonschmaEditor.get()));
+  $('.encode').click(function(){
+    jsonschmaEditor.set(encode(newCodeSourceEditor.get(),!!$(this).attr('all')));
   });
 
 
+  $('.decode').click(function(){
+    newCodeSourceEditor.set(decode(jsonschmaEditor.get(),!!$(this).attr('all')));
+  });
+
+  require('./src/drop')([jsonschmaEditor,newCodeSourceEditor]);
 
 });
 

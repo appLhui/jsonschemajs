@@ -14,6 +14,7 @@ module.exports = function (key, value, cfg) {
     _key = _str[0];
   }
   if(!cfg) return cfg;
+  if(!cfg.properties) return false;
   _.extend(cfg.properties[_key], {
     'description': _str[2],
     'title': _str[2]

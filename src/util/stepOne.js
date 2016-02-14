@@ -7,11 +7,16 @@ var _ = require('underscore');
 
 
 
-module.exports = function (key, value, cfg) {
+module.exports = function (key, value, cfg,all) {
   var typeOf = require("./typeOf");
   var rander = require('../encodeJsonschma');
 
   key = key.split('\|')[0];
+
+
+  if (all && key.indexOf('*')) {
+    key = '*' + key;
+  }
 
   if (!cfg) {
     cfg = {
@@ -22,17 +27,19 @@ module.exports = function (key, value, cfg) {
   }
   if (!key.indexOf('*')) { // 属性为必填项
     key = key.substring(1, key.length);
+    if(!cfg.required) cfg.required = [];
     cfg.required.push(key);
   }
   if (_.isObject(value) && !_.isArray(value)) {
     cfg.properties[key] = _.extend({
       'type': typeOf(value)
-    },rander(value));
+    },rander(value,all));
   }else if(_.isObject(value) && _.isArray(value)){
     cfg.properties[key] = _.extend({
       'type': 'array'
-    },{items:rander(value[0])});
+    },{items:rander(value[0],all)});
   } else {
+    if(!cfg.properties) return false;
     cfg.properties[key] = {
       'type': typeOf(value),
       'default': value

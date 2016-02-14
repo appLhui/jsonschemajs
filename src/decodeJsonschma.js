@@ -18,23 +18,23 @@ var rander = function (obj, reObj) {
         if(value.enum){
           _range += value.enum.join(',');
         }else{
-          if(value.minLength > value.maxLength) return console.warn(key + '[minLength] 属性大于[maxLength]');
+          if(value.minLength > value.maxLength) return $.growl.warning({ message:key + '[minLength] 属性大于[maxLength]'});
           if(value.minLength) _range += value.minLength + '~';
           if(value.maxLength) _range += '~' + value.maxLength;
         }
       }
       if(value.type == 'integer'){
-        if(value.minimum > value.maximum) return console.warn(key + '[minimum] 属性大于[maximum]');
+        if(value.minimum > value.maximum) return $.growl.warning({ message:key + '[minimum] 属性大于[maximum]'});
         if(value.minimum) _range += value.minimum + '~';
         if(value.maximum) _range += '~' + value.maximum;
       }
       if(value.type == 'array'){
-        if(value.minItems > value.maxItems) return console.warn(key + '[minItems] 属性大于[maxItems]');
+        if(value.minItems > value.maxItems) return $.growl.warning({ message:key + '[minItems] 属性大于[maxItems]'});
         if(value.minItems) _range += value.minItems + '~';
         if(value.maxItems) _range += '~' + value.maxItems;
       }
       if(value.type == 'object'){
-        if(value.minProperties > value.maxProperties) return console.warn(key + '[minProperties] 属性大于[maxProperties]');
+        if(value.minProperties > value.maxProperties) return $.growl.warning({ message:key + '[minProperties] 属性大于[maxProperties]'});
         if(value.minProperties) _range += value.minProperties + '~';
         if(value.maxProperties) _range += '~' + value.maxProperties;
       }

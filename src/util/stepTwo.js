@@ -1,4 +1,5 @@
 /**
+ *
  * Created by lihui on 15-12-10.
  * 验证第二步 判断第二步 是 该属性的解释还是 长度判断
  *
@@ -17,20 +18,20 @@ module.exports = function (key, value, cfg) {
     _key = _str[0];
   }
   if (_str[1].indexOf('~') != -1) {
+    if(!cfg.properties) return false;
     var _array = _str[1].split('~');
     if (_array.length != 2) { // 长度判断格式不正确
-      return console.warn(_str[0] + '表示长度的表达式有错误－Demo：1~10');
+      return $.growl.warning({ message:_str[0] + '表示长度的表达式有错误－Demo：1~10'});
     }
 
     var _minimum = parseInt(_array[0]); // 最小值
     var _maximum = parseInt(_array[1]); // 最大值
 
     if(_maximum<_minimum){
-      return console.warn(_str[0] + '最大值小于最小值');
+      return $.growl.warning({ message:_str[0] + '最大值小于最小值'});
     }
 
     if (_.isNumber(_minimum) && !_.isNaN(_minimum)) {
-
       if(typeOf(value) == 'integer'){
         _.extend(cfg.properties[_key], {
           'minimum': _minimum
@@ -51,6 +52,7 @@ module.exports = function (key, value, cfg) {
     }
 
     if (_.isNumber(_maximum) && !_.isNaN(_maximum)) {
+
       if(typeOf(value) == 'integer'){
         _.extend(cfg.properties[_key], {
           'maximum': _maximum
@@ -70,10 +72,12 @@ module.exports = function (key, value, cfg) {
       }
     }
   }else if(_str[1].indexOf(',') != -1 && typeOf(value) == 'string'){  // 如果是一个字符并且是枚举方式
+    if(!cfg.properties) return false;
     _.extend(cfg.properties[_key], {
       'enum': _str[1].split(',')
     });
   } else {  // 第二步表示为 该项目的description
+    if(!cfg.properties) return false;
     _.extend(cfg.properties[_key], {
       'description': _str[1],
       'title': _str[1]
