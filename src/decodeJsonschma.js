@@ -23,7 +23,7 @@ var rander = function (obj, reObj) {
           if(value.maxLength) _range += '~' + value.maxLength;
         }
       }
-      if(value.type == 'integer'){
+      if(value.type == 'integer'||value.type == 'number'){
         if(value.minimum > value.maximum) return $.growl.warning({ message:key + '[minimum] 属性大于[maximum]'});
         if(value.minimum) _range += value.minimum + '~';
         if(value.maximum) _range += '~' + value.maximum;
@@ -54,11 +54,11 @@ var rander = function (obj, reObj) {
         if(value.default){
           reObj[_key] = value.default;
         }else if(value.type == 'string'){
-          reObj[_key] = 'hello word';
+          reObj[_key] = '';
         }else if(value.type == 'integer'){
           reObj[_key] = 0;
         }else if(value.type == 'boolean'){
-          reObj[_key] = true;
+          reObj[_key] = false;
         }
       }
     });

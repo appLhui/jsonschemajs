@@ -13,7 +13,7 @@ var analyzeString = function (key, value, cfg, all) {
 
   switch (_array.length) {
     case 1:
-      key += '|暂无';
+      key += '|'+key;
       return step2(key, value, step1(key, value, cfg, all));
     case 2:
       return step2(key, value, step1(key, value, cfg, all));
