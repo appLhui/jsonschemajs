@@ -79,7 +79,7 @@ module.exports = function (key, value, cfg) {
   } else {  // 第二步表示为 该项目的description
     if(!cfg.properties) return false;
     _.extend(cfg.properties[_key], {
-      'description': _str[1],
+      //'description': _str[1],
       'title': _str[1]
     });
   }
