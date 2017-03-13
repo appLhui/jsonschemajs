@@ -38780,7 +38780,7 @@
 
 	  switch (_array.length) {
 	    case 1:
-	      key += '|暂无';
+	      key += '|'+key;
 	      return step2(key, value, step1(key, value, cfg, all));
 	    case 2:
 	      return step2(key, value, step1(key, value, cfg, all));
@@ -40369,8 +40369,7 @@
 	var _ = __webpack_require__(121);
 
 
-
-	module.exports = function (key, value, cfg,all) {
+	module.exports = function (key, value, cfg, all) {
 	  var typeOf = __webpack_require__(123);
 	  var rander = __webpack_require__(120);
 
@@ -40390,24 +40389,25 @@
 	  }
 	  if (!key.indexOf('*')) { // 属性为必填项
 	    key = key.substring(1, key.length);
-	    if(!cfg.required) cfg.required = [];
+	    if (!cfg.required) cfg.required = [];
 	    cfg.required.push(key);
 	  }
 	  if (_.isObject(value) && !_.isArray(value)) {
 	    cfg.properties[key] = _.extend({
 	      'type': typeOf(value)
-	    },rander(value,all));
-	  }else if(_.isObject(value) && _.isArray(value)){
+	    }, rander(value, all));
+	  } else if (_.isObject(value) && _.isArray(value)) {
 	    cfg.properties[key] = _.extend({
 	      'type': 'array'
-	    },{items:rander(value[0],all)});
+	    }, {items: rander(value[0], all)});
 	  } else {
-	    if(!cfg.properties) return false;
+	    if (!cfg.properties) return false;
 	    cfg.properties[key] = {
 	      'type': typeOf(value),
 	      'default': value
 	    };
 	  }
+	  if (cfg.required && !cfg.required.length) delete cfg.required;
 
 	  return cfg;
 	}
@@ -40519,7 +40519,7 @@
 	  } else {  // 第二步表示为 该项目的description
 	    if(!cfg.properties) return false;
 	    _.extend(cfg.properties[_key], {
-	      'description': _str[1],
+	      //'description': _str[1],
 	      'title': _str[1]
 	    });
 	  }
@@ -40549,7 +40549,7 @@
 	  if(!cfg) return cfg;
 	  if(!cfg.properties) return false;
 	  _.extend(cfg.properties[_key], {
-	    'description': _str[2],
+	    //'description': _str[2],
 	    'title': _str[2]
 	  });
 	  return cfg;
@@ -40584,7 +40584,7 @@
 	          if(value.maxLength) _range += '~' + value.maxLength;
 	        }
 	      }
-	      if(value.type == 'integer'){
+	      if(value.type == 'integer'||value.type == 'number'){
 	        if(value.minimum > value.maximum) return $.growl.warning({ message:key + '[minimum] 属性大于[maximum]'});
 	        if(value.minimum) _range += value.minimum + '~';
 	        if(value.maximum) _range += '~' + value.maximum;
@@ -40615,11 +40615,11 @@
 	        if(value.default){
 	          reObj[_key] = value.default;
 	        }else if(value.type == 'string'){
-	          reObj[_key] = 'hello word';
+	          reObj[_key] = '';
 	        }else if(value.type == 'integer'){
 	          reObj[_key] = 0;
 	        }else if(value.type == 'boolean'){
-	          reObj[_key] = true;
+	          reObj[_key] = false;
 	        }
 	      }
 	    });
